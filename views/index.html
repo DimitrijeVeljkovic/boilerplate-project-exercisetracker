@@ -48,15 +48,32 @@
         />
         <input type="submit" value="Submit" />
       </form>
-      <p>
-        <strong>GET user's exercise log: </strong>
-        <code>GET /api/users/:_id/logs?[from][&amp;to][&amp;limit]</code>
-      </p>
-      <p><strong>[ ]</strong> = optional</p>
-      <p>
-        <strong>from, to</strong> = dates (yyyy-mm-dd); <strong>limit</strong> =
-        number
-      </p>
+      <form id="logs-form" method="get">
+        <p>
+          <strong>GET user's exercise log: </strong>
+          <code>GET /api/users/:_id/logs?[from][&amp;to][&amp;limit]</code>
+        </p>
+        <p><strong>[ ]</strong> = optional</p>
+        <p>
+          <strong>from, to</strong> = dates (yyyy-mm-dd);
+          <strong>limit</strong> = number
+        </p>
+        <input id="userid" type="text" placeholder=":_id" />
+        <input
+          id="fromdate"
+          name="from"
+          type="text"
+          placeholder="from date (yyyy-mm-dd)"
+        />
+        <input
+          id="todate"
+          name="to"
+          type="text"
+          placeholder="to date (yyyy-mm-dd)"
+        />
+        <input id="limit" name="limit" type="text" placeholder="limit" />
+        <input type="submit" value="Submit" />
+      </form>
     </div>
     <script>
       const exerciseForm = document.getElementById("exercise-form");
@@ -66,6 +83,14 @@
         exerciseForm.action = `/api/users/${userId}/exercises`;
 
         exerciseForm.submit();
+      });
+
+      const logsForm = document.getElementById("logs-form");
+      logsForm.addEventListener("submit", () => {
+        const userId = document.getElementById("userid").value;
+        logsForm.action = `/api/users/${userId}/logs`;
+
+        logsForm.submit();
       });
     </script>
   </body>
